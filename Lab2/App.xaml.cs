@@ -10,4 +10,3 @@ namespace DP_of_Graph_Interfaces;
 public partial class App : Application
 {
 }
-
