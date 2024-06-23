@@ -1,0 +1,89 @@
+﻿<Window x:Class="DP_of_Graph_Interfaces.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="TextEditor" Height="720" Width="960" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <LinearGradientBrush x:Key="LinearPanelBrush">
+            <GradientStop Color="Yellow" Offset="0"></GradientStop>
+            <GradientStop Color="LightSkyBlue" Offset="0.5"></GradientStop>
+            <GradientStop Color="Yellow" Offset="0.8"></GradientStop>
+        </LinearGradientBrush>
+
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="BorderBrush" Value="White"></Setter>
+        </Style>
+
+        <!-- Trigger for font -->
+        <Style x:Key="BigFontButton">
+            <Style.Setters>
+                <Setter Property="Control.FontFamily" Value="Times New Roman" />
+                <Setter Property="Control.FontSize" Value="18" />
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="Control.IsMouseOver" Value="True">
+                    <Setter Property="Control.Foreground" Value="DarkRed" />
+                    <Setter Property="Control.FontSize" Value="21" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto">
+            </RowDefinition>
+            <RowDefinition Height="*">
+            </RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" BorderBrush="#FFCBBEBE" BorderThickness="2" CornerRadius="10"
+                Background="{StaticResource LinearPanelBrush}">
+        </Border>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" FocusManager.IsFocusScope="True">
+            <Button Style="{StaticResource ButtonStyle}" Width="100" Height="100" Command="Open">
+                <Image Source="/Resources/Open.png" ToolTip="Відкрити" />
+            </Button>
+            <Button Style="{StaticResource ButtonStyle}" Width="100" Height="100" Command="Delete">
+                <Image Source="/Resources/Clear.png" ToolTip="Стерти" />
+            </Button>
+            <Button Style="{StaticResource ButtonStyle}" Width="100" Height="100" Command="Copy">
+                <Image Source="/Resources/Copy.png" ToolTip="Копіювати"/>
+            </Button>
+            <Button Style="{StaticResource ButtonStyle}" Width="100" Height="100" Command="Paste">
+                <Image Source="/Resources/Paste.png" ToolTip="Вставити"/>
+            </Button>
+        </StackPanel>
+
+        <Border Grid.Row="1" BorderBrush="#FFCBBEBE" BorderThickness="2" CornerRadius="10"
+                Background="{StaticResource LinearPanelBrush}">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*">
+                    </RowDefinition>
+                    <RowDefinition Height="Auto">
+                    </RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBox Grid.Row="0" x:Name="InputTextBox" VerticalAlignment="Top" TextWrapping="Wrap"
+                         VerticalScrollBarVisibility="Visible"
+                         Margin="50" Height="300"
+                         FontSize="{Binding ElementName=FontSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+
+                <DockPanel Grid.Row="1" Height="Auto">
+                    <Button Style="{x:Null}" DockPanel.Dock="Bottom" Command="Save" Margin="50" Width="100" Height="30">Ok</Button>
+                    
+                    <Label FontSize="16">Розмір шрифту</Label>
+                    <Slider Name="FontSlider" Margin="4" MinWidth="100" Minimum="12" Maximum="100" Value="16"></Slider>
+                </DockPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
